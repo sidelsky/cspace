@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+  
+  wordpress:
+    image: wordpress
+    restart: always
+    ports: 
+      - 8081:80
+    volumes:
+      - ./themes/Divi:/var/www/html/wp-content/themes/Divi
+      - ./themes/Divi-cspace:/var/www/html/wp-content/themes/Divi-cspace
+      - ./uploads:/var/www/html/wp-content/uploads
+      - ./plugins:/var/www/html/wp-content/plugins
+
+    environment:
+      WORDPRESS_DB_NAME: cspace
+      WORDPRESS_DB_PASSWORD: root
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root

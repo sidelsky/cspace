@@ -1,0 +1,73 @@
+/*
+ Theme Name:   CSpace (Divi Child)
+ Theme URI:    https://www.elegantthemes.com
+ Description:  Divi child theme
+ Template:     Divi
+ Text Domain:  Divi-child
+*/
+
+.auto-layout{
+    //test
+    div{
+
+        a{
+            display: block;
+            position: relative;
+        }
+
+        //border: 1px solid grey;
+        .overlay-content{
+            position: absolute;
+            top:0;
+            left:0;
+            padding:60px;
+            width:100%;
+            height:100%;
+
+            .title{
+                position: absolute;
+                top:60px;
+                left: 60px;
+                font-size: 36px;
+                color:white;
+                &.bottom{
+                    font-size: 20px;
+                    top: auto;
+                    left:30px;
+                    bottom: 30px;
+                }
+            }
+        }
+    }
+    .et_pb_row{
+        width: inherit;
+    }
+    :first-child{
+        padding-top:0;
+    }
+}
+
+//hubspot form
+.hbspt-form{
+
+    input, select, textarea{
+        height:24px !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        transition: none !important;
+    }
+
+    select{
+        height:36px !important;
+        width: auto !important;
+    }
+
+    .hs-button{
+        border:none !important;
+        background-color: #3574e3 !important;
+        background-image: none !important;
+        border-radius: 0 !important;
+    }
+
+}

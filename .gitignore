@@ -1,0 +1,8 @@
+uploads/*
+!uploads/dynamic_avia/
+themes/Divi-cspace/assets/src/node_modules
+plugins/akismet/
+plugins/hello.php
+data/*
+db/*
+
