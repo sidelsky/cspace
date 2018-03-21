@@ -2,8 +2,7 @@
 
 
 class ApiEndpoints {
-    public function registerRoutes() 
-    {
+    public function registerRoutes() {
         register_rest_route(
             'cs-api/',
             'filter',
@@ -14,16 +13,14 @@ class ApiEndpoints {
         );
     }
 
-    private function createQuery($categoryId)
-    {
+    private function createQuery($categoryId) {
         return new WP_Query(array(
             'post_type' => ['thinking', 'work', 'post'],
             'cat' => $categoryId
         ));
     }
 
-    public function filter($request) 
-    {
+    public function filter($request) {
         $categoryId = $request['categoryid'];
         $query = $this->createQuery($categoryId);
 
@@ -32,34 +29,38 @@ class ApiEndpoints {
         $work = [];
 
       if ($query->have_posts()) {
+          
           while ($query->have_posts()) {
               $query->the_post();
 
               global $post;
+              $categories = get_the_category();
+              $isFeatured = false;
 
               $promo = [
                   'id' => get_the_id(),
                   'title' =>get_the_title(),
-                  'type' => get_post_type()
+                  'type' => get_post_type(),
               ];
-
-              $categories = get_categories();
 
               foreach($categories as $category) {
                   if ($category->slug === 'featured') {
                     $featured[] = $promo;
-                    break;
-                  } else {
-                      switch(get_post_type()){
-                          case 'work':
-                          $work[] = $promo;
-                          break;
-                          
-                          case 'thinking':
-                          $thinking[] = $promo;
-                          break;
-                      }
+                    $isFeatured = true;
                   }
+              }
+
+              if (!$isFeatured) {
+                switch(get_post_type()){
+                    case 'work':
+                    
+                    $work[] = $promo;
+                    break;
+                    
+                    case 'thinking':
+                    $thinking[] = $promo;
+                    break;
+                }
               }
           }
           

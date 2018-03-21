@@ -7,9 +7,9 @@ $pageId = 157;
 
 function makePromo($post) {
     return [
-        'id' => get_the_id(),
-        'title' =>get_the_title(),
-        'type' => get_post_type()
+        'id' => get_the_id($post->ID),
+        'title' =>get_the_title($post->ID),
+        'type' => get_post_type($post->ID)
     ];
 }
 
@@ -39,4 +39,3 @@ function renderAllFilters() {
 
     return $html;
 }
-
