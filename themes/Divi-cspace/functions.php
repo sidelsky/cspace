@@ -1,6 +1,8 @@
 <?php
-
 define('WP_DEBUG', true);
+
+include('templates/template-inc/filter-wrapper.php');
+add_shortcode( 'auto-layout', 'renderAllFilters' );
 
 // add_filter( 'pods_shortcode', function( $tags )  {
 // 	$tags[ 'shortcodes' ] = true;
@@ -18,7 +20,7 @@ function load_scripts() {
    wp_enqueue_script('main-js');
 } 
    add_action( 'wp_enqueue_scripts', 'load_scripts' );  
-
+include('templates/template-inc/filter-api.php');
 /**
  *	This will hide the Divi "Project" post type.
  */
@@ -33,22 +35,12 @@ function mytheme_et_project_posttype_args( $args ) {
 	));
 };
 
+add_action('rest_api_init', 'registerMyRestRoutes');
+function registerMyRestRoutes() {
+	$endPoints = new ApiEndpoints();
+	$endPoints->registerRoutes();
+}
 
-//for use within Divi
-function autoLayoutShortcode($atts) {
-
-	if($atts){
-		$filterPageID = $atts['page'];// this should always be posted so ACF knows what page fields to pull in
-		$filterCatID = $atts['cat'];
-	}
-
-	ob_start();
-	//get_template_part('my_form_template');
-	include( locate_template( $templatePath . 'templates/dynamic-post-layout-shortcode.php', false,false ));
-	return ob_get_clean();
-
-};
-add_shortcode( 'auto-layout', 'autoLayoutShortcode' );
 
 
 //filter auto-layout shortcode

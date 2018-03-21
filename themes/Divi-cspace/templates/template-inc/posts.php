@@ -80,10 +80,11 @@ if(!function_exists('outputPosts')){
         $wp_post_ids = array_slice($post_ids, 0, $amount);
 
         $args = array(
-        'post_type'		=> $post_types,
-        //'cat'			=> $cat,
-        'post__in'		=> $wp_post_ids,
-        'orderby'		=> 'post__in'
+            'post_type'		=> $post_types,
+            //'cat'			=> $cat,
+            'post__in'		=> $wp_post_ids,
+            'orderby'		=> 'post__in',
+            'order' => 'DESC'
         );
         
         $the_query = new WP_Query( $args );

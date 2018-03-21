@@ -9,10 +9,10 @@ if(!function_exists('fourPosts')){
         $wp_post_ids= array_slice($post_ids, 0, 4);
 
         $args = array(
-        'post_type'		=> array('post', 'podcast', 'press', 'report'),
-        //'cat'			=> $cat,
-        'post__in'		=> $wp_post_ids,
-        'orderby'		=> 'post__in'
+            'post_type'		=> array('post', 'podcast', 'press', 'report'),
+            //'cat'			=> $cat,
+            'post__in'		=> $wp_post_ids,
+            'orderby'		=> 'post__in'
         );
         
         $the_query = new WP_Query( $args );
